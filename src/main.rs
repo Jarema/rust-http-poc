@@ -25,7 +25,7 @@ pub fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use gotham::test::TestServer;
+    use gotham::{hyper::StatusCode, test::TestServer};
 
     #[test]
     fn receive_hello_world_response() {
@@ -36,7 +36,7 @@ mod tests {
             .perform()
             .unwrap();
 
-        assert_eq!(response.status(), StatusCode::Ok);
+        assert_eq!(response.status(), StatusCode::OK);
 
         let body = response.read_body().unwrap();
         assert_eq!(&body[..], b"Hello World!");
